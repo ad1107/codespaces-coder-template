@@ -1,0 +1,6 @@
+# Terraform Variables File
+# Override these values as needed for your environment
+
+# Docker socket path (default for most Linux systems)
+# For rootless Docker, this might be: /run/user/1000/docker.sock
+docker_socket = "/var/run/docker.sock"
