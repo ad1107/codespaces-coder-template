@@ -1,4 +1,4 @@
-# Universal DevContainer Template for Coder
+# Universal DevContainer Template for [Coder](https://coder.com)
 
 This template brings the GitHub Codespaces experience to your self-hosted Coder installation. It is designed to provide a persistent, fully featured development environment that pulls the container image once and retains all data, extensions, and system changes across restarts.  
 
@@ -8,8 +8,9 @@ Unlike ephemeral containers that rebuild on every start, this template persists 
 
 *   **State Persistence:** The user home directory, system packages installed via `apt`, VS Code extensions, and project files in `/workspaces` are preserved indefinitely.
 *   **Performance:** The workspace boots in seconds because the container image is not recreated on startup.
-*   **Lifecycle Control:** Workspaces do not have an auto-shutdown timer. They run continuously until manually stopped, making them suitable for long-running background tasks or servers.
-*   **Resource Management:** Administrators and users can define specific CPU core and RAM limits to manage infrastructure load effectively.
+*   **Lifecycle Control:** Workspaces do not have an auto-shutdown timer. They run continuously until manually stopped, making them suitable for long-running background tasks or servers, ensuring full persistence.
+*   **Resource Management:** Administrators and users can define specific CPU core and RAM limits to manage infrastructure load effectively. Pull once, reuse indefinitely and rebuilds frequently based on devcontainer.json
+*   **Self-hosted:** Easily deploy freely, with privacy on any devices you own, without limits.
 
 ## Environment Architecture
 
@@ -73,16 +74,6 @@ While the Microsoft Universal image is the default, the template accepts any Doc
 *   `mcr.microsoft.com/devcontainers/python:3.11`
 *   `mcr.microsoft.com/devcontainers/javascript-node:18`
 *   `mcr.microsoft.com/devcontainers/go:1.21`
-
-## Comparison to GitHub Codespaces
-
-| Feature | Coder Universal Template | GitHub Codespaces |
-|---------|--------------------------|-------------------|
-| **Persistence** | Full persistence of OS, tools, and home directory | Stops after inactivity; OS resets on rebuild |
-| **Auto-Shutdown** | Manual control (runs indefinitely) | Enforced timeout (30 min - 4 hours) |
-| **Image Strategy** | Pull once, reuse indefinitely | Rebuilds frequently based on devcontainer.json |
-| **Setup Time** | Immediate boot (post-creation) | 30-60 seconds (requires container build) |
-| **Infrastructure** | Self-hosted (your hardware rules) | Cloud-hosted (quota-based) |
 
 ## License
 
