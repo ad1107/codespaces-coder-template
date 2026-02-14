@@ -316,7 +316,7 @@ resource "docker_container" "workspace" {
 
   # GPU Support - NVIDIA
   dynamic "devices" {
-    for_each = data.coder_parameter.enable_gpu.value == "true" ? [1] : []
+    for_each = data.coder_parameter.enable_gpu.value == true ? [1] : []
     content {
       driver       = "nvidia"
       count        = -1
@@ -347,7 +347,7 @@ resource "docker_container" "workspace" {
     "TZ=UTC",
     "USER=${local.username}",
     "HOME=/home/${local.username}",
-    "NVIDIA_VISIBLE_DEVICES=${data.coder_parameter.enable_gpu.value == "true" ? "all" : "void"}",
+    "NVIDIA_VISIBLE_DEVICES=${data.coder_parameter.enable_gpu.value ? "all" : "void"}",
   ]
 
   # Working directory
