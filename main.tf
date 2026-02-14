@@ -112,7 +112,7 @@ data "coder_parameter" "enable_gpu" {
   display_name = "Enable GPU (NVIDIA)"
   description  = "Attach NVIDIA GPU to this workspace for CUDA/ML workloads"
   type         = "bool"
-  default      = "true"
+  default      = true
   mutable      = false
   icon         = "/icon/widgets.svg"
   order        = 8
@@ -316,7 +316,7 @@ resource "docker_container" "workspace" {
 
   # GPU Support - NVIDIA
   dynamic "devices" {
-    for_each = data.coder_parameter.enable_gpu.value == true ? [1] : []
+    for_each = data.coder_parameter.enable_gpu.value ? [1] : []
     content {
       driver       = "nvidia"
       count        = -1
