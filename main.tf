@@ -80,14 +80,14 @@ data "coder_parameter" "cpu_cores" {
   display_name = "CPU Cores"
   description  = "Number of CPU cores to allocate"
   type         = "number"
-  default      = "4"
+  default      = "2"
   mutable      = false
   icon         = "/icon/memory.svg"
   order        = 6
 
   validation {
     min = 1
-    max = 16
+    max = 8
   }
 }
 
@@ -96,15 +96,26 @@ data "coder_parameter" "memory_gb" {
   display_name = "Memory (GB)"
   description  = "Amount of RAM to allocate in GB"
   type         = "number"
-  default      = "8"
+  default      = "4"
   mutable      = false
   icon         = "/icon/memory.svg"
   order        = 7
 
   validation {
     min = 1
-    max = 64
+    max = 8
   }
+}
+
+data "coder_parameter" "enable_gpu" {
+  name         = "enable_gpu"
+  display_name = "Enable GPU (NVIDIA)"
+  description  = "Attach NVIDIA GPU to this workspace for CUDA/ML workloads"
+  type         = "bool"
+  default      = "true"
+  mutable      = false
+  icon         = "/icon/widgets.svg"
+  order        = 8
 }
 
 # -----------------------------------------------------------------------------
@@ -303,6 +314,16 @@ resource "docker_container" "workspace" {
   cpu_shares = data.coder_parameter.cpu_cores.value * 1024
   memory     = data.coder_parameter.memory_gb.value * 1024 * 1024 * 1024
 
+  # GPU Support - NVIDIA
+  dynamic "devices" {
+    for_each = data.coder_parameter.enable_gpu.value == "true" ? [1] : []
+    content {
+      driver       = "nvidia"
+      count        = -1
+      capabilities = ["gpu"]
+    }
+  }
+
   privileged = false
 
   capabilities {
@@ -326,6 +347,7 @@ resource "docker_container" "workspace" {
     "TZ=UTC",
     "USER=${local.username}",
     "HOME=/home/${local.username}",
+    "NVIDIA_VISIBLE_DEVICES=${data.coder_parameter.enable_gpu.value == "true" ? "all" : "void"}",
   ]
 
   # Working directory
