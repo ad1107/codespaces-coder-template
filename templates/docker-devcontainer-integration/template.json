@@ -1,0 +1,9 @@
+{
+  "name": "Codespaces Devcontainer",
+  "description": "Closer Codespaces-like Coder template using @devcontainers/cli, coder_devcontainer, host Docker socket access, and homelab-comfy persistence.",
+  "icon": "/icon/devcontainers.svg",
+  "tags": ["docker", "devcontainer", "vscode", "homelab"],
+  "default_ttl_ms": 28800000,
+  "max_ttl_ms": 604800000,
+  "allow_user_cancel_workspace_jobs": true
+}

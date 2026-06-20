@@ -1,0 +1,14 @@
+{
+  "name": "docker-compose-devcontainer",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/docker-compose-devcontainer",
+  "postCreateCommand": "echo compose-ready > compose-ready.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-containers"
+      ]
+    }
+  }
+}

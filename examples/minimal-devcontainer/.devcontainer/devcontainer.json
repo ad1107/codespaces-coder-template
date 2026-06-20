@@ -1,0 +1,12 @@
+{
+  "name": "minimal-devcontainer",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "postCreateCommand": "echo minimal-devcontainer-ready > .post-create-ran",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.makefile-tools"
+      ]
+    }
+  }
+}

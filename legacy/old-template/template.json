@@ -1,0 +1,9 @@
+{
+  "name": "Universal DevContainer",
+  "description": "A GitHub Codespaces-like experience with full persistence, VS Code Web, and Docker support",
+  "icon": "/icon/docker.svg",
+  "tags": ["docker", "devcontainer", "vscode", "codespaces", "universal"],
+  "default_ttl_ms": 28800000,
+  "max_ttl_ms": 604800000,
+  "allow_user_cancel_workspace_jobs": true
+}
